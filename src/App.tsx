@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import Navigation from './components/Navigation';
+import { Task } from './components/Classes';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
+
 
 
 
@@ -17,26 +19,14 @@ export default function App(){
       setIsLoggedIn(!isLoggedIn)
     }
 
-    let currentID:number = 0
 
-    class Task {
-        task_id:number;
-        title:string; 
-        description:string; 
-        completed:boolean;
-
-      constructor(task:string, desc:string) {
-        this.title = task,
-        this.description = desc
-        this.task_id = currentID
-        this.completed = false
-        currentID++
-      }
-    }
 
     const createTask = (task:string, desc:string) => {
       tasks.push(new Task(task, desc))
     }
+
+    createTask("Buy eggs", "Only farm fresh for me!")
+    createTask("Mow lawn", "Make sure the gas is full, and cut to 2.75 inches")
 
     return (
         <>
@@ -52,9 +42,9 @@ export default function App(){
                   <Form.Label>Description</Form.Label>
                   <Form.Control type='text' placeholder='Enter More Details' />
                 </Form.Group>
-                <Button variant="primary" onClick={createTask(formTaskTitle, formTaskDescription)}>
+                {/* <Button variant="primary" onClick={createTask(formTaskTitle, formTaskDescription)}>
                   Submit
-                </Button>
+                </Button> */}
               </Form>
                 <Card>
                 {tasks.map( p => <Card.Body key={p.task_id}>{p.title} - {p.description}</Card.Body> )}
