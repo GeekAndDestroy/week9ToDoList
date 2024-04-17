@@ -1,9 +1,8 @@
+import { Link } from 'react-router-dom';
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import InputGroup from "react-bootstrap/InputGroup";
+
 
 type NavigationProps = {
   isLoggedIn: boolean;
@@ -25,24 +24,8 @@ export default function Navigation({ isLoggedIn }: NavigationProps) {
               </>
             ) : (
               <>
-                <Form className="d-flex">
-                  <InputGroup>
-                    <InputGroup.Text id="signInUsername">
-                      Username
-                    </InputGroup.Text>
-                    <Form.Control type="text" placeholder="Username" />
-                  </InputGroup>
-                  <InputGroup>
-                    <InputGroup.Text id="signInPassword">
-                      Password
-                    </InputGroup.Text>
-                    <Form.Control type="password" placeholder="Password" />
-                  </InputGroup>
-                  <Button variant="primary" type="submit">
-                    Sign In
-                  </Button>
-                </Form>
-                <Nav.Link href="/">Sign Up</Nav.Link>
+                <Nav.Link as={ Link } to='/signup'>Sign Up</Nav.Link>
+                <Nav.Link href='/'>Log In</Nav.Link>
               </>
             )}
           </Nav>
