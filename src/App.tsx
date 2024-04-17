@@ -1,55 +1,42 @@
-import { useState } from 'react';
-import Navigation from './components/Navigation';
-import { Task } from './components/Classes';
-import Container from 'react-bootstrap/Container';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Card from 'react-bootstrap/Card';
+import { useState } from "react";
+import Navigation from "./components/Navigation";
+import TaskCard from "./components/TaskCard";
+import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Card from "react-bootstrap/Card";
+import TaskForm from "./components/TaskForm";
+import { TaskFormDataType, TaskType } from "./Types/index";
 
+export default function App() {
+  const [showForm, setShowForm] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const handleClick = () => {
+    console.log("The button has been clicked");
+    setIsLoggedIn(!isLoggedIn);
+  };
 
+  const [tasks, setTasks] = useState<TaskType[]>([])
 
-export default function App(){
-    // const firstName: string = 'Jeff';
-    // const lastName: string = 'Chebul';
-    const[isLoggedIn, setIsLoggedIn] = useState(false);
-    const tasks: Task[] = []
-    const handleClick = () => {
-      console.log('The button has been clicked');
-      setIsLoggedIn(!isLoggedIn)
-    }
+  const createTask = (newTaskData: TaskFormDataType) => {
+    const newTask: TaskType = {...newTaskData, taskId:tasks.length+1, createdAt:new Date().toString(), completed:false, userId:1}
+    setTasks([...tasks, newTask])
+  }
 
-
-
-    const createTask = (task:string, desc:string) => {
-      tasks.push(new Task(task, desc))
-    }
-
-    createTask("Buy eggs", "Only farm fresh for me!")
-    createTask("Mow lawn", "Make sure the gas is full, and cut to 2.75 inches")
-
-    return (
-        <>
-            <Navigation isLoggedIn={isLoggedIn}/>
-            <Container>
-              <Button variant='primary' onClick={handleClick}>Click Me</Button>
-              <Form>
-                <Form.Group className="mb-3" controlId="formTaskTitle">
-                  <Form.Label>Task:</Form.Label>
-                  <Form.Control type="text" placeholder='Enter Task'/>
-                </Form.Group>
-                <Form.Group className='mb-3' controlId='formTaskDescription'>
-                  <Form.Label>Description</Form.Label>
-                  <Form.Control type='text' placeholder='Enter More Details' />
-                </Form.Group>
-                {/* <Button variant="primary" onClick={createTask(formTaskTitle, formTaskDescription)}>
-                  Submit
-                </Button> */}
-              </Form>
-                <Card>
-                {tasks.map( p => <Card.Body key={p.task_id}>{p.title} - {p.description}</Card.Body> )}
-                </Card>
-            </Container>
-        </>
-    )
+  return (
+    <>
+      <Navigation isLoggedIn={isLoggedIn} />
+      <Container>
+        <Button variant="primary" onClick={handleClick}>
+          Click Me
+        </Button>
+        <Button className='w-100' variant='success' onClick={() => setShowForm(!showForm)}>{showForm ? 'Hide Form' : 'Add Task+'}</Button>
+        {showForm && <TaskForm createTask={ createTask } /> }
+        {tasks.map((p) => (
+          <TaskCard key={p.taskId} task={p} />
+        ))}
+      </Container>
+    </>
+  );
 }
