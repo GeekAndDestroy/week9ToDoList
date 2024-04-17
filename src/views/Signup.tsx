@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Nav from "react-bootstrap/Nav";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -8,7 +9,7 @@ type SignupProps = {}
 export default function Signup({}: SignupProps) {
   return (
     <>
-    <Form className="d-flex">
+    <Form>
     <InputGroup>
       <InputGroup.Text id="signInUsername">
         Username
@@ -25,7 +26,7 @@ export default function Signup({}: SignupProps) {
       Sign In
     </Button>
   </Form>
-  <Nav.Link href="/">Sign Up</Nav.Link>
+  <Nav.Link as={ Link } to="/">Sign Up</Nav.Link>
   </>
   )
 }
