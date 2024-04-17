@@ -38,7 +38,7 @@ export default function TaskForm({ createTask }: TaskFormProps) {
       <Form.Group className="mb-3">
         <Form.Label>Description</Form.Label>
         <Form.Control
-          name="desc"
+          name="description"
           placeholder="Enter More Details"
           value={newTask.description}
           onChange={handleInputChange}
@@ -53,7 +53,7 @@ export default function TaskForm({ createTask }: TaskFormProps) {
           onChange={handleInputChange}
         />
       </Form.Group>
-      <Button variant="primary">Add Task</Button>
+      <Button variant="primary" type='submit'>Add Task</Button>
     </Form>
   );
 }

@@ -2,9 +2,8 @@ import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
-import Home from "./views/home";
-import Signup from "./views/signup";
+import Home from "./views/Home";
+import Signup from "./views/Signup";
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

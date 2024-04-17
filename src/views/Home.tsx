@@ -3,14 +3,14 @@ import TaskCard from "../components/TaskCard";
 
 import Button from "react-bootstrap/Button";
 import TaskForm from "../components/TaskForm";
-import { TaskFormDataType, TaskType, UserType } from "../Types/index";
+import { TaskFormDataType, TaskType } from "../Types/index";
 
 type HomeProps = {
   isLoggedIn: boolean;
   handleClick: () => void;
 };
 
-export default function Home({ isLoggedIn, handleClick }: HomeProps) {
+export default function Home({ handleClick }: HomeProps) {
   const [showForm, setShowForm] = useState(false);
 
   const [tasks, setTasks] = useState<TaskType[]>([
@@ -32,7 +32,7 @@ export default function Home({ isLoggedIn, handleClick }: HomeProps) {
   ]);
 
   const createTask = (newTaskData: TaskFormDataType) => {
-    const author: UserType = {
+    const author = {
       userId: 3,
       username: "maverick",
       email: "toofyboy@dogmail.com",
@@ -47,6 +47,7 @@ export default function Home({ isLoggedIn, handleClick }: HomeProps) {
       author,
     };
     setTasks([...tasks, newTask]);
+    setShowForm(false);
   };
 
   return (
